@@ -16,14 +16,14 @@ const Products = ({id, cardStyling, pageView}: PageProps) => {
     {
       icon: QrCode,
       title: "MPESA QR Code Generator",
-      href: "",
+      href: "https://merchantpro.cloudora.live/",
       description:
         "Generate custom QR codes for seamless mobile payments and faster transactions.",
     },
     {
       icon: BookOpen,
       title: "Learning Management System",
-      href: "",
+      href: "https://lms.cloudora.live/",
       description:
         "Upload courses, manage assignments, and track student progress with easy analytics.",
     },
