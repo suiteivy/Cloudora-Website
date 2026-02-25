@@ -1,4 +1,5 @@
 import { BookOpen, Box, Calendar, Home, QrCode } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import type PageProps from "@/PageProps";
@@ -8,30 +9,35 @@ const Products = ({id, cardStyling, pageView}: PageProps) => {
     {
       icon: Calendar,
       title: "Appointment booking system",
+      href: "https://bookease.cloudora.live/",
       description:
         "Smart scheduling with automated WhatsApp reminders to reduce no-shows and manage staff schedules.",
     },
     {
       icon: QrCode,
       title: "MPESA QR Code Generator",
+      href: "",
       description:
         "Generate custom QR codes for seamless mobile payments and faster transactions.",
     },
     {
       icon: BookOpen,
       title: "Learning Management System",
+      href: "",
       description:
         "Upload courses, manage assignments, and track student progress with easy analytics.",
     },
     {
       icon: Home,
       title: "Rent Tracking System",
+      href: "https://rentease.cloudora.live/",
       description:
         "Automate rent collection and reminders via WhatsApp, simplifying property management.",
     },
     {
       icon: Box,
       title: "Inventory Management System",
+      href: "https://stocksense.cloudora.live/",
       description:
         "Real-time inventory tracking and management to optimize stock levels and reduce waste.",
     },
@@ -55,39 +61,46 @@ const Products = ({id, cardStyling, pageView}: PageProps) => {
           {productsList.map((product, index) => {
             const Icon = product.icon;
             return (
-              <Card
+              <Link
                 key={index}
-                // className="p-4 shadow-lg border-gray-100 hover:-translate-y-1 transition-all duration-300"
-                className={`${cardStyling}`}
+                to={product.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "block",
+                }}
               >
-                <div className="w-14 h-14 bg-orange-500 rounded-full flex items-center justify-center mb-4">
-                  <Icon className="h-7 w-7 text-white" />
-                </div>
-                <div className="mb-3">
-                  <h3 className="text-xl font-semibold text-gray-900">
-                    {product.title}
-                  </h3>
-                </div>
-                <div>
-                  <p className="text-gray-600 leading-relaxed">
-                    {product.description}
-                  </p>
-                </div>
-              </Card>
+                <Card className={`${cardStyling} h-full`}>
+                  <div className="w-14 h-14 bg-orange-500 rounded-full flex items-center justify-center mb-4">
+                    <Icon className="h-7 w-7 text-white" />
+                  </div>
+                  <div className="mb-3">
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {product.title}
+                    </h3>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 leading-relaxed">
+                      {product.description}
+                    </p>
+                  </div>
+                </Card>
+              </Link>
             );
           })}
         </div>
 
         {/* CTA Button */}
         <div className="text-center">
-            <Button
-              variant="default"
-              className="!bg-orange-500 hover:!bg-orange-600 text-white px-8 py-6 text-lg rounded-full"
-              onClick={() => pageView?.("formView")}
-            >
-              Book Consultation
-            </Button>
-          
+          <Button
+            variant="default"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg rounded-full"
+            onClick={() => pageView?.("formView")}
+          >
+            Book Consultation
+          </Button>
         </div>
       </div>
     </div>
