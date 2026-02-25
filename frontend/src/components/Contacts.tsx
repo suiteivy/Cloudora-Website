@@ -11,14 +11,14 @@ const Contacts = ({id, cardStyling}: PageProps) => {
     {
       icon: Mail,
       label: "Email",
-      value: "Contact@cloudoraltd.live",
-      link: "mailto:Contact@cloudoraltd.live"
+      value: "Contact@cloudoraltd@gmail.com",
+      link: "mailto:Contact@cloudoraltd@gamil.com"
     },
     {
       icon: Target,
       label: "Help",
-      value: "Support@cloudoraltd.live",
-      link: "mailto:Support@cloudoraltd.live"
+      value: "Support@cloudoraltd@gamil.com",
+      link: "mailto:Support@cloudoraltd@gamil.com"
     },
     {
       icon: Instagram,

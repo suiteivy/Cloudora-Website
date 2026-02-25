@@ -97,36 +97,6 @@ const Main = () => {
           </div>
         </footer>
       }
-      <style>
-        {`
-          .banner-enter {
-            animation: banner-enter 700ms ease-out;
-          }
-
-          .banner-glow {
-            background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.28) 50%, transparent 70%);
-            transform: translateX(-120%);
-            animation: banner-glow 3.5s linear infinite;
-          }
-
-          @keyframes banner-enter {
-            0% {
-              opacity: 0;
-              transform: translateY(-8px);
-            }
-            100% {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes banner-glow {
-            100% {
-              transform: translateX(140%);
-            }
-          }
-        `}
-      </style>
     </>
   );
 }
