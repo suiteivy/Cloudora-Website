@@ -11,8 +11,8 @@ const Contacts = ({id, cardStyling}: PageProps) => {
     {
       icon: Mail,
       label: "Email",
-      value: "contact@cloudora.live",
-      link: "mailto:contact@cloudora.live"
+      value: "contact@cloudoraltd.live ",
+      link: "mailto:contact@cloudoraltd.live "
     },
     {
       icon: Phone,
