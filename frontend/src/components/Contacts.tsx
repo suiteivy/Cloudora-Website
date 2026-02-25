@@ -1,4 +1,4 @@
-import { Mail, Phone, Instagram, Linkedin } from "lucide-react"
+import { Mail, Phone, Instagram, Linkedin, Target } from "lucide-react"
 import { Card } from "./ui/card"
 
 interface PageProps {
@@ -11,14 +11,14 @@ const Contacts = ({id, cardStyling}: PageProps) => {
     {
       icon: Mail,
       label: "Email",
-      value: "contact@cloudora.live",
-      link: "mailto:contact@cloudora.live"
+      value: "Contact@cloudoraltd.live",
+      link: "mailto:Contact@cloudoraltd.live"
     },
     {
-      icon: Phone,
-      label: "Phone",
-      value: "+254 759 585 197",
-      link: "tel:+254759585197"
+      icon: Target,
+      label: "Help",
+      value: "Support@cloudoraltd.live",
+      link: "mailto:Support@cloudoraltd.live"
     },
     {
       icon: Instagram,
