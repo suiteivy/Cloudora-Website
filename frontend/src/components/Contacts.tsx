@@ -17,7 +17,7 @@ const Contacts = ({ id, cardStyling }: PageProps) => {
     {
       icon: Phone,
       label: "Phone",
-      value: "+254 712 345 678",
+      value: "+254 759 585 197",
       link: "tel:+254759585197"
     },
     {
