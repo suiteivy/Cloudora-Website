@@ -6,19 +6,19 @@ interface PageProps {
   cardStyling: string
 }
 
-const Contacts = ({id, cardStyling}: PageProps) => {
+const Contacts = ({ id, cardStyling }: PageProps) => {
   const contactInfo = [
     {
       icon: Mail,
       label: "Email",
-      value: "Contact@cloudoraltd@gmail.com",
-      link: "mailto:Contact@cloudoraltd@gamil.com"
+      value: "Support@cloudoraltd.live",
+      link: "https://mail.google.com/mail/?view=cm&fs=1&to=Support@cloudoraltd.live&su=Support%20Request&body=Hello%20Cloudora%20Team,"
     },
     {
-      icon: Target,
-      label: "Help",
-      value: "Support@cloudoraltd@gamil.com",
-      link: "mailto:Support@cloudoraltd@gamil.com"
+      icon: Phone,
+      label: "Phone",
+      value: "+254 712 345 678",
+      link: "tel:+254712345678"
     },
     {
       icon: Instagram,
@@ -33,54 +33,53 @@ const Contacts = ({id, cardStyling}: PageProps) => {
       link: "https://linkedin.com/company/cloudora-solutions"
     }
   ]
-  
+
   return (
-    <>
-        <div id={id} className="max-w-[1600px] mx-auto px-4 min-h-fit mb-10">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Contact Us
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Get in touch with our team
-            </p>
-          </div>
+    <div id={id} className="max-w-[1600px] mx-auto px-4 min-h-fit mb-10">
+      {/* Header */}
+      <div className="text-center mb-12">
+        <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          Contact Us
+        </h2>
+        <p className="text-lg text-muted-foreground">
+          Get in touch with our team
+        </p>
+      </div>
 
-          {/* Contact Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {contactInfo.map((contact, index) => {
-              const Icon = contact.icon
-              return (
-                <a
-                  key={index}
-                  href={contact.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <Card className={`p-8 ${cardStyling}`}>
-                    <div className="flex items-start space-x-4">
-                      <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center shrink-0">
-                        <Icon className="h-6 w-6 text-orange-500" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">
-                          {contact.label}
-                        </p>
-                        <p className="text-lg font-medium text-foreground">
-                          {contact.value}
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-                </a>
-              )
-            })}
-          </div>
-        </div>
+      {/* Contact Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        {contactInfo.map((contact, index) => {
+          const Icon = contact.icon
+          const isExternal = contact.link.startsWith("http")
 
-    </>
+          return (
+            <a
+              key={index}
+              href={contact.link}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
+              className="block"
+            >
+              <Card className={`p-8 hover:shadow-lg transition-all duration-300 cursor-pointer ${cardStyling}`}>
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center shrink-0">
+                    <Icon className="h-6 w-6 text-orange-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-1">
+                      {contact.label}
+                    </p>
+                    <p className="text-lg font-medium text-foreground">
+                      {contact.value}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </a>
+          )
+        })}
+      </div>
+    </div>
   )
 }
 
