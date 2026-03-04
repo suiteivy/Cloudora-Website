@@ -11,8 +11,8 @@ const Contacts = ({ id, cardStyling }: PageProps) => {
     {
       icon: Mail,
       label: "Email",
-      value: "Support@cloudoraltd.live",
-      link: "https://mail.google.com/mail/?view=cm&fs=1&to=Support@cloudoraltd.live&su=Support%20Request&body=Hello%20Cloudora%20Team,"
+      value: "Contact@cloudoraltd.live",
+      link: "https://mail.google.com/mail/?view=cm&fs=1&to=Contact@cloudoraltd.live"
     },
     {
       icon: Phone,
