@@ -20,20 +20,7 @@ const Main = () => {
     </div>
   )
 
-  const DiscountBanner = () => (
-    <div className="fixed top-20 left-0 right-0 z-40 overflow-hidden bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 px-4 py-2 text-white shadow-md">
-      <div className="pointer-events-none absolute inset-0 banner-glow" />
-      <div className="relative max-w-8xl mx-auto banner-enter">
-        <div className="flex flex-col items-center justify-center gap-1 text-center">
-          <p className="flex items-center gap-2 text-sm font-semibold sm:text-base">
-            <Sparkles className="h-4 w-4" />
-            Limited-Time Offer: Get 10% OFF all Cloudora services
-          </p>
-          {/* <p className="text-xs font-medium sm:text-sm">Use code: CLOUDORA10</p> */}
-        </div>
-      </div>
-    </div>
-  )
+
 
   const handleSwitch = (newMode: "formView" | "mainView") => {
     setIsLoading(true)
@@ -65,7 +52,7 @@ const Main = () => {
           pageView={handleSwitch}
         />
       )}
-      {!isLoading && mode === "mainView" && <DiscountBanner />}
+      {!isLoading && mode === "mainView"}
       
       {isLoading ? (
         <LoadingView />
