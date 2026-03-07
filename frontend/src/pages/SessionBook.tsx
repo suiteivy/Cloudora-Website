@@ -1,13 +1,13 @@
+import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Toaster, toast } from "sonner";
-import { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Link } from "react-router-dom";
-import type PageProps from "@/PageProps";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 
 const apiUrl = import.meta.env.VITE_GOOGLE_API;
 
@@ -35,9 +35,10 @@ const validateEmail = (email: string): { isValid: boolean; error: string } => {
   return { isValid: true, error: "" };
 };
 
-const SessionBook = ({pageView}:PageProps) => {
+const SessionBook = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const navigate = useNavigate();
   const [sessionData, setSessionData] = useState<SessionFormData>({
     name: "",
     email: "",
@@ -157,11 +158,11 @@ const SessionBook = ({pageView}:PageProps) => {
 
   const handleCreateSession = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Honeypot check (bot detection)
     if (sessionData.website_url) {
       console.warn("Bot detected!");
-      return; 
+      return;
     }
 
     // Validate form
@@ -195,7 +196,7 @@ const SessionBook = ({pageView}:PageProps) => {
       toast.success("Waitlist joined successfully", {
         description: "We'll be in touch soon!"
       });
-      
+
       // Reset form
       setSessionData({
         name: "",
@@ -209,22 +210,23 @@ const SessionBook = ({pageView}:PageProps) => {
         communication: "",
         website_url: "",
       });
-      
-      pageView?.("mainView");
-      
+
+      navigate("/");
+
     } catch (error) {
       console.error("submission failed:", error);
       toast.error("Something went wrong", {
         description: "Please try again later"
       });
-    } finally{
+    } finally {
       setIsLoading(false);
     }
   };
 
   return (
     <>
-      <div className="mx-auto flex items-center justify-center mb-4 mt-2">
+      <Navigation />
+      <div className="pt-24 pb-12 px-4 min-h-screen">
         <Card className="w-full max-w-2xl pt-2 lg:max-w-4xl mx-auto">
           <CardHeader>
             <CardTitle className="text-2xl">Cloudora Waitlist Form</CardTitle>
@@ -254,7 +256,7 @@ const SessionBook = ({pageView}:PageProps) => {
                       value={sessionData.website_url || ""}
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="name" className="flex items-center gap-1">
                       Name <span className="text-destructive text-sm">*</span>
@@ -271,7 +273,7 @@ const SessionBook = ({pageView}:PageProps) => {
                       minLength={2}
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="email">
                       Email <span className="text-destructive">*</span>
@@ -290,7 +292,7 @@ const SessionBook = ({pageView}:PageProps) => {
                       <p className="text-xs text-red-500 mt-1">{emailError}</p>
                     )}
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="phone">
                       Phone <span className="text-destructive">*</span>
@@ -306,7 +308,7 @@ const SessionBook = ({pageView}:PageProps) => {
                       minLength={10}
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="company_name">
                       Company name <span className="text-destructive">*</span>
@@ -322,7 +324,7 @@ const SessionBook = ({pageView}:PageProps) => {
                     />
                   </div>
                 </div>
-                
+
                 {/* Role Radio Group */}
                 <div className="space-y-4 p-4 border rounded-lg bg-slate-50/50">
                   <div className="col-span-full border-b pb-2 mb-2">
@@ -348,11 +350,10 @@ const SessionBook = ({pageView}:PageProps) => {
                         key={role.id}
                         className={`relative flex items-center space-x-3 p-0 rounded-md 
                         border transition-all cursor-pointer hover:bg-orange-100
-                        ${
-                          sessionData.role === role.id
+                        ${sessionData.role === role.id
                             ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
                             : "border-slate-200 bg-white hover:border-slate-300"
-                        }`}
+                          }`}
                       >
                         <Label
                           htmlFor={role.id}
@@ -370,23 +371,23 @@ const SessionBook = ({pageView}:PageProps) => {
                   </RadioGroup>
                   {(sessionData.role === "other" ||
                     sessionData.role.startsWith("other:")) && (
-                    <Input
-                      placeholder="Please specify your role..."
-                      className="mt-2 transition-all duration-300"
-                      required
-                      value={
-                        sessionData.role.startsWith("other:")
-                          ? sessionData.role.replace("other: ", "")
-                          : ""
-                      }
-                      onChange={(e) =>
-                        setSessionData((prev) => ({
-                          ...prev,
-                          role: `other: ${e.target.value}`,
-                        }))
-                      }
-                    />
-                  )}
+                      <Input
+                        placeholder="Please specify your role..."
+                        className="mt-2 transition-all duration-300"
+                        required
+                        value={
+                          sessionData.role.startsWith("other:")
+                            ? sessionData.role.replace("other: ", "")
+                            : ""
+                        }
+                        onChange={(e) =>
+                          setSessionData((prev) => ({
+                            ...prev,
+                            role: `other: ${e.target.value}`,
+                          }))
+                        }
+                      />
+                    )}
                 </div>
 
                 {/* Products Checkbox Group */}
@@ -409,11 +410,10 @@ const SessionBook = ({pageView}:PageProps) => {
                       return (
                         <div
                           key={item}
-                          className={`rounded-md border transition-all shadow-sm hover:bg-orange-100 ${
-                            isSelected
-                              ? "border-orange-500 bg-orange-50"
-                              : "border-slate-200 bg-white"
-                          }`}
+                          className={`rounded-md border transition-all shadow-sm hover:bg-orange-100 ${isSelected
+                            ? "border-orange-500 bg-orange-50"
+                            : "border-slate-200 bg-white"
+                            }`}
                         >
                           <Label
                             htmlFor={item}
@@ -460,10 +460,9 @@ const SessionBook = ({pageView}:PageProps) => {
                   >
                     <div
                       className={`relative flex items-center rounded-md border transition-all
-                        ${
-                          sessionData.delivery_date === "immediately"
-                            ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
-                            : "border-slate-200 bg-white hover:border-slate-300"
+                        ${sessionData.delivery_date === "immediately"
+                          ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
+                          : "border-slate-200 bg-white hover:border-slate-300"
                         }`}
                     >
                       <Label
@@ -481,10 +480,9 @@ const SessionBook = ({pageView}:PageProps) => {
 
                     <div
                       className={`relative flex items-center rounded-md border transition-all
-                        ${
-                          sessionData.delivery_date === "within-1-3-months"
-                            ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
-                            : "border-slate-200 bg-white hover:border-slate-300"
+                        ${sessionData.delivery_date === "within-1-3-months"
+                          ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
+                          : "border-slate-200 bg-white hover:border-slate-300"
                         }`}
                     >
                       <Label
@@ -502,10 +500,9 @@ const SessionBook = ({pageView}:PageProps) => {
 
                     <div
                       className={`relative flex items-center rounded-md border transition-all
-                        ${
-                          sessionData.delivery_date === "just-exploring"
-                            ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
-                            : "border-slate-200 bg-white hover:border-slate-300"
+                        ${sessionData.delivery_date === "just-exploring"
+                          ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
+                          : "border-slate-200 bg-white hover:border-slate-300"
                         }`}
                     >
                       <Label
@@ -543,11 +540,10 @@ const SessionBook = ({pageView}:PageProps) => {
                   >
                     <div
                       className={`relative flex items-center rounded-md border transition-all
-                    ${
-                      sessionData.beta_updates === "yes"
-                        ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
-                        : "border-slate-200 bg-white hover:border-slate-300"
-                    }`}
+                    ${sessionData.beta_updates === "yes"
+                          ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
+                          : "border-slate-200 bg-white hover:border-slate-300"
+                        }`}
                     >
                       <Label
                         htmlFor="beta-yes"
@@ -564,11 +560,10 @@ const SessionBook = ({pageView}:PageProps) => {
 
                     <div
                       className={`relative flex items-center rounded-md border transition-all
-                    ${
-                      sessionData.beta_updates === "no"
-                        ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
-                        : "border-slate-200 bg-white hover:border-slate-300"
-                    }`}
+                    ${sessionData.beta_updates === "no"
+                          ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
+                          : "border-slate-200 bg-white hover:border-slate-300"
+                        }`}
                     >
                       <Label
                         htmlFor="beta-no"
@@ -613,16 +608,14 @@ const SessionBook = ({pageView}:PageProps) => {
                         <div
                           key={item.id}
                           className={`rounded-md border transition-all shadow-sm hover:bg-orange-100 
-                              ${
-                                isSelected
-                                  ? "border-orange-500 bg-orange-50"
-                                  : "border-slate-200 bg-white"
-                              }
-                              ${
-                                isDisabled
-                                  ? "opacity-50 cursor-not-allowed bg-slate-50"
-                                  : "hover:bg-orange-100"
-                              }
+                              ${isSelected
+                              ? "border-orange-500 bg-orange-50"
+                              : "border-slate-200 bg-white"
+                            }
+                              ${isDisabled
+                              ? "opacity-50 cursor-not-allowed bg-slate-50"
+                              : "hover:bg-orange-100"
+                            }
                               
                               `}
                         >
@@ -710,17 +703,15 @@ const SessionBook = ({pageView}:PageProps) => {
                     Clear Form
                   </Button>
 
-                  <Link to={"/"} className="order-2 sm:order-2">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="w-full"
-                      disabled={isLoading}
-                      onClick={() => pageView?.("mainView")}
-                    >
-                      Cancel
-                    </Button>
-                  </Link>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="order-2 sm:order-2"
+                    disabled={isLoading}
+                    onClick={() => navigate("/")}
+                  >
+                    Cancel
+                  </Button>
 
                   <Button
                     type="submit"

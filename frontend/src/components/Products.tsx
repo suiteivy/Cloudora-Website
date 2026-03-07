@@ -1,10 +1,10 @@
+import type PageProps from "@/PageProps";
 import { BookOpen, Box, Calendar, Home, QrCode } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import type PageProps from "@/PageProps";
+import { Card } from "./ui/card";
 
-const Products = ({id, cardStyling, pageView}: PageProps) => {
+const Products = ({ id, cardStyling }: PageProps) => {
   const productsList = [
     {
       icon: Calendar,
@@ -94,13 +94,14 @@ const Products = ({id, cardStyling, pageView}: PageProps) => {
 
         {/* CTA Button */}
         <div className="text-center">
-          <Button
-            variant="default"
-            className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg rounded-full"
-            onClick={() => pageView?.("formView")}
-          >
-            Book Consultation
-          </Button>
+          <Link to="/book-consultation">
+            <Button
+              variant="default"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg rounded-full"
+            >
+              Book Consultation
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
