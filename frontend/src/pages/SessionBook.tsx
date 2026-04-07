@@ -193,7 +193,7 @@ const SessionBook = () => {
         body: JSON.stringify(sessionData),
       });
 
-      toast.success("Waitlist joined successfully", {
+      toast.success("Submitted successfully", {
         description: "We'll be in touch soon!"
       });
 
@@ -724,7 +724,7 @@ const SessionBook = () => {
                         <span className="animate-spin">⏳</span>
                       </>
                     ) : (
-                      "Join Waitlist"
+                      "Submit"
                     )}
                   </Button>
                 </div>
