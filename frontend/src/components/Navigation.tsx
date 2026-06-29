@@ -81,7 +81,7 @@ export const Navigation = () => {
                 );
               })}
 
-              <Link to="/book-consultation">
+              <Link to="https://docs.google.com/forms/d/e/1FAIpQLScQXEbBBZcPa3qAskjj4TvCzEb7nfLLZwwynjJsZ27-YYph_A/viewform">
                 <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full text-sm font-medium transition-all shadow-md">
                   Get Started
                 </button>

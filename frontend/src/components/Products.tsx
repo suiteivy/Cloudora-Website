@@ -94,7 +94,7 @@ const Products = ({ id, cardStyling }: PageProps) => {
 
         {/* CTA Button */}
         <div className="text-center">
-          <Link to="/book-consultation">
+          <Link to="https://docs.google.com/forms/d/e/1FAIpQLScQXEbBBZcPa3qAskjj4TvCzEb7nfLLZwwynjJsZ27-YYph_A/viewform">
             <Button
               variant="default"
               className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg rounded-full"
